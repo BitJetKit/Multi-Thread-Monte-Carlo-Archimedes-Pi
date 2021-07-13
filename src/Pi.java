@@ -55,8 +55,7 @@ public class Pi{
     public double getPi(int i){                    
         double pi = 0;
         this.totalSides = i;
-        double calculator = totalSides * Math.sin(piSimulation / totalSides);
-        pi = calculator;    
+        pi = totalSides * Math.sin(piSimulation / totalSides);
         return pi;
     }
 }
