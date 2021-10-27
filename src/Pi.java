@@ -1,17 +1,22 @@
+/**
+ * @author BitJetKit
+ * @since July 2021
+ */
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Pi{
-    AtomicInteger AtomicSuccess;
+    private AtomicInteger atomicSuccess;
+    private AtomicInteger stepCounter;
     
-    protected int totalThrows;
-    protected int counter;
-
+    private int totalThrows;
+    private int counter;
+    
     private int totalSides;
 
     double piSimulation, pi;
-
+    
     // Utilize the Monte Carlo simulation: it is a pseudo-arbitrary reference point.
     class MonteCarlo implements Runnable{
         @Override
@@ -19,15 +24,19 @@ public class Pi{
             double x = Math.random();
             double y = Math.random();
             if(x * x + y * y <= 1){
-                AtomicSuccess.incrementAndGet();
+                atomicSuccess.incrementAndGet();
+                stepCounter.incrementAndGet();
             }
         }
+    }
+    public Pi(){
     }
 
     // Call the class' custom constructor: it is requiring this.
     public Pi(int i)
     {
-        this.AtomicSuccess = new AtomicInteger(0);
+        this.atomicSuccess = new AtomicInteger(0);
+        this.stepCounter = new AtomicInteger(0);
         this.totalThrows = i;
         this.pi = 0;
     }
@@ -47,7 +56,7 @@ public class Pi{
         executor.shutdown();
         while(!executor.isTerminated())
         {
-            piSimulation = 4.0 * AtomicSuccess.get() / totalThrows;
+            piSimulation = 4.0 * atomicSuccess.get() / totalThrows;
         }
             return piSimulation;
     }
@@ -58,5 +67,11 @@ public class Pi{
         pi = totalSides * Math.sin(piSimulation / totalSides);
         return pi;
     }
+    // Use a custom toString function.
+    public String toString(){
+        return "Here is the total increments of Monte Carlo method: " + atomicSuccess + 
+               ". Here is the measurement counter to test loop unrolling: " + stepCounter +
+               ". These are identical, so these run in constant time: it is that the runtime"
+               + " complexity is Bit Omicron (n).";
+    }
 }
-
