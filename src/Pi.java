@@ -12,7 +12,7 @@ public class Pi{
 
     double piSimulation, pi;
 
-    // This is the Monte Carlo simulation: it is a pseudo-arbitrary reference point.
+    // Utilize the Monte Carlo simulation: it is a pseudo-arbitrary reference point.
     class MonteCarlo implements Runnable{
         @Override
         public void run(){
@@ -24,7 +24,7 @@ public class Pi{
         }
     }
 
-    // This is the class' custom constructor.
+    // Call the class' custom constructor: it is requiring this.
     public Pi(int i)
     {
         this.AtomicSuccess = new AtomicInteger(0);
@@ -32,7 +32,7 @@ public class Pi{
         this.pi = 0;
     }
 
-    // This is how we get Pi using multiple threads.
+    // Get Pi using multiple threads.
     public double getPiSimulation() 
     {
         int totalProcessors = Runtime.getRuntime().availableProcessors();
@@ -51,7 +51,7 @@ public class Pi{
         }
             return piSimulation;
     }
-
+    // Use Archimedes' method to get a more accurate Pi.
     public double getPi(int i){                    
         double pi = 0;
         this.totalSides = i;
