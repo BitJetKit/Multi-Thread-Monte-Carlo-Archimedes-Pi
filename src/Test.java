@@ -1,8 +1,9 @@
 public class Test {
     public static void main(String[] args) throws Exception {
 
-        // These are PI values.
+        // Declare PI.
         double piSimulationRes, pi;
+        // Initialize a PI reference value.
         double piEgypt = 22.0/7.0;
 
         // Get the test start time.
@@ -20,7 +21,7 @@ public class Test {
         // Find the most accurate side using Archimedes' method.
         pi = testPi.getPi(99999);
 
-        // These print statements are the end-user dialogue.
+        // Print the end-user dialogue.
         System.out.println("Here is the test result.");
         System.out.println("Available processors: " + Runtime.getRuntime().availableProcessors());
         System.out.println("Pi Simulation: " + piSimulationRes);
