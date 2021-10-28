@@ -8,11 +8,10 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class Pi{
     private AtomicInteger atomicSuccess;
-    private AtomicInteger stepCounter;
     
     private int totalThrows;
     private int counter;
-    
+    private int iterator;
     private int totalSides;
 
     double piSimulation, pi;
@@ -25,7 +24,6 @@ public class Pi{
             double y = Math.random();
             if(x * x + y * y <= 1){
                 atomicSuccess.incrementAndGet();
-                stepCounter.incrementAndGet();
             }
         }
     }
@@ -35,19 +33,42 @@ public class Pi{
     // Call the class' custom constructor: it is requiring this.
     public Pi(int i)
     {
-        this.atomicSuccess = new AtomicInteger(0);
-        this.stepCounter = new AtomicInteger(0);
+        resetSuccess();
+        resetCounter();
         this.totalThrows = i;
+    }
+    public int getIterator(){
+        return iterator;
+    }
+    public void setIterator(){
+        this.iterator = iterator++;
+    }
+    public int getCounter(){
+        return counter;
+    }
+    public void setCounter(){
+        this.counter = counter++;
+    }
+    // Reset the fields.
+    public void resetIterator(){
+        this.iterator = 0;
+    }
+    public void resetCounter(){
+        this.counter = 0;
+    }
+    public void resetSuccess(){
+        this.atomicSuccess = new AtomicInteger(0);
+    }
+    public void resetPi(){
         this.pi = 0;
     }
-
     // Get Pi using multiple threads.
     public double getPiSimulation() 
     {
         int totalProcessors = Runtime.getRuntime().availableProcessors();
         
         ExecutorService executor = Executors.newWorkStealingPool(totalProcessors);
-        for(int i = 1; i <= totalThrows; i++)
+        for(iterator = 0; iterator < totalThrows; iterator++)
         {
             Runnable worker = new MonteCarlo();
 
@@ -69,9 +90,9 @@ public class Pi{
     }
     // Use a custom toString function.
     public String toString(){
-        return "Here is the total increments of Monte Carlo method: " + atomicSuccess + 
-               ". Here is the measurement counter to test loop unrolling: " + stepCounter +
-               ". These are identical, so these run in constant time: it is that the runtime"
-               + " complexity is Bit Omicron (n).";
+        return "Here is the total increments of Monte Carlo method (i.e. total throws): " + i +
+               ". Here is the measurement counter to test loop unrolling: " + counter +
+               ". These are identical: it is that these are running in constant time. " +
+               "So, the runtime complexity of this is iterative: it is a runtime complexity, Big Omicron (n).";
     }
 }
