@@ -27,6 +27,7 @@ public class Pi{
             }
         }
     }
+    // Utilize the class' default constructor for testing the runtime complexity.
     public Pi(){
     }
 
@@ -37,6 +38,7 @@ public class Pi{
         resetCounter();
         this.totalThrows = i;
     }
+    // Implement the accessors.
     public int getIterator(){
         return iterator;
     }
