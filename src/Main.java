@@ -1,31 +1,28 @@
 public class Main {
     public static void main(String[] args) throws Exception {
-
-        // Declare PI.
-        double piSimulationRes, pi;
-        // Initialize a PI reference value.
+ac
+        // These are PI values.
+        double piSimulationRes;
         double piEgypt = 22.0/7.0;
+
+        // Get the test start time.
+        long startTime = System.currentTimeMillis();
+        
         // Run the simulation.
-        Pi testPi = new Pi(10000000);
-        piSimulationRes = testPi.getPiSimulation();
-        
-        
-        
+        Pi testPi = new Pi(9000000);
+        piSimulationRes = testPi.PiSimulation();
 
-        // Find the most accurate side using Archimedes' method.
-        pi = testPi.getPi(99999);
+        // Get the test stop time.
+        long stopTime = System.currentTimeMillis();
 
-        // Print the end-user dialogue.
+        // These print statements are the end-user dialogue.
         System.out.println("Here is the test result.");
-        System.out.println("Available processors: " + Runtime.getRuntime().availableProcessors());
+        System.out.println("Total threads: " + Runtime.getRuntime().availableProcessors());
         System.out.println("Pi Simulation: " + piSimulationRes);
-        System.out.println("An Egyptian Pi record: " + piEgypt);
+        System.out.println("Egypt's 2nd Pi record: " + piEgypt);
         System.out.println("Error difference: " + (piSimulationRes - piEgypt));
         System.out.println("Error rate: " + (piSimulationRes - piEgypt) / piEgypt * 100 + "%");
-        System.out.println("Adjusted Pi result with Archimedes' method: " + pi);
-
-        // Call the default constructor to run the custom return statement.
-        Pi piRuntime = new Pi();
-        piRuntime.toString();
+        System.out.println("Pi library entry: " + Math.PI);
+        System.out.println("Time Duration: " + (stopTime - startTime) + "ms");
     }
 }
