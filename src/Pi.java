@@ -8,8 +8,6 @@ public class Pi{
     protected int totalThrows;
     protected int counter;
 
-    private int totalSides;
-
     double piSimulation, pi;
     
     // This is the Monte Carlo simulation: it is a pseudo-arbitrary reference point.
@@ -44,7 +42,7 @@ public class Pi{
         executor.shutdown();
         while(!executor.isTerminated())
         {
-            piSimulation = Double.parseDouble(String.valueOf(AtomicSuccess.get() / totalThrows / 2.0));
+            piSimulation = 4.0 * AtomicSuccess.get() / totalThrows;
         }
             return piSimulation;
     }
